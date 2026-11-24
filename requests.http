@@ -1,0 +1,41 @@
+### ใช้กับส่วนขยาย REST Client ใน VS Code: คลิก "Send Request" เหนือแต่ละคำขอ
+@host = http://localhost:3000
+
+### โจทย์ 1 ค่าจัดส่ง: 50 บาท
+GET {{host}}/shipping?weight=1&zone=bangkok
+### 96 บาท
+GET {{host}}/shipping?weight=2.5&zone=north
+### 75 บาท
+GET {{host}}/shipping?weight=0.5&zone=south
+### 400 น้ำหนักติดลบ
+GET {{host}}/shipping?weight=-1&zone=north
+### 400 ไม่ระบุน้ำหนัก
+GET {{host}}/shipping?zone=north
+### 400 เขตไม่มีอยู่
+GET {{host}}/shipping?weight=2&zone=mars
+
+### โจทย์ 2 ค่าปรับ: 0 บาท
+GET {{host}}/fine?days=2&type=general
+### 25 บาท
+GET {{host}}/fine?days=8&type=general
+### 140 บาท
+GET {{host}}/fine?days=10&type=reserve
+### 500 บาท (ชนเพดาน)
+GET {{host}}/fine?days=60&type=reference
+### 400 วันติดลบ
+GET {{host}}/fine?days=-3&type=general
+### 400 ประเภทไม่มีอยู่
+GET {{host}}/fine?days=5&type=magazine
+
+### โจทย์ 3 ค่าไฟ: 340 บาท
+GET {{host}}/electricity?units=100&type=residential
+### 690 บาท
+GET {{host}}/electricity?units=200&type=residential
+### 1940 บาท
+GET {{host}}/electricity?units=500&type=business
+### 40 บาท
+GET {{host}}/electricity?units=0&type=residential
+### 400 ไม่ใช่ตัวเลข
+GET {{host}}/electricity?units=abc&type=residential
+### 400 ประเภทไม่มีอยู่
+GET {{host}}/electricity?units=100&type=factory
